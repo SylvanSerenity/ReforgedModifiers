@@ -152,17 +152,6 @@ public class Modifiers {
     ));
 
     /* UNIVERSAL MODIFIERS */
-    public static final Modifier DEADLY = register(new Modifier(
-        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "deadly"),
-        Map.of(
-            Modifier.Category.TOOL, new Modifier.CategoryData(2, List.of(
-                new Modifier.Entry(Attributes.ATTACK_DAMAGE, 0.10, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.BLOCK_BREAK_SPEED, 0.10, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
-            ))
-            // TODO Ranged
-        )
-    ));
-
     public static final Modifier LAZY = register(new Modifier(
         ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "lazy"),
         Map.of(
@@ -230,23 +219,63 @@ public class Modifiers {
             ))
         )
     ));
-    public static final Modifier LIGHT = register(new Modifier(
-        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "light"),
+    public static final Modifier STRONG = register(new Modifier(
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "strong"),
         Map.of(
-            Modifier.Category.TOOL, new Modifier.CategoryData(0, List.of(
-                new Modifier.Entry(Attributes.BLOCK_BREAK_SPEED, .15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_SPEED, .15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, -.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            Modifier.Category.TOOL, new Modifier.CategoryData(1, List.of(
+                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             ))
         )
     ));
-    public static final Modifier HEAVY = register(new Modifier(
-        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "heavy"),
+    public static final Modifier HURTFUL = register(new Modifier(
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "hurtful"),
         Map.of(
-            Modifier.Category.TOOL, new Modifier.CategoryData(0, List.of(
-                new Modifier.Entry(Attributes.BLOCK_BREAK_SPEED, -.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_SPEED, -.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, .15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            Modifier.Category.TOOL, new Modifier.CategoryData(1, List.of(
+                new Modifier.Entry(Attributes.ATTACK_DAMAGE, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            ))
+        )
+    ));
+    public static final Modifier FORCEFUL = register(new Modifier(
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "forceful"),
+        Map.of(
+            Modifier.Category.TOOL, new Modifier.CategoryData(1, List.of(
+                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            ))
+        )
+    ));
+    public static final Modifier UNPLEASANT = register(new Modifier(
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "unpleasant"),
+        Map.of(
+            Modifier.Category.TOOL, new Modifier.CategoryData(2, List.of(
+                new Modifier.Entry(Attributes.ATTACK_DAMAGE, 0.05, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            ))
+        )
+    ));
+    public static final Modifier RUTHLESS = register(new Modifier(
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "ruthless"),
+        Map.of(
+            Modifier.Category.TOOL, new Modifier.CategoryData(1, List.of(
+                new Modifier.Entry(Attributes.ATTACK_DAMAGE, 0.18, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            ))
+        )
+    ));
+    public static final Modifier DEADLY = register(new Modifier(
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "deadly"),
+        Map.of(
+            Modifier.Category.TOOL, new Modifier.CategoryData(2, List.of(
+                new Modifier.Entry(Attributes.ATTACK_DAMAGE, 0.10, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(Attributes.BLOCK_BREAK_SPEED, 0.10, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            ))
+            // TODO Ranged
+        )
+    ));
+    public static final Modifier NIMBLE = register(new Modifier(
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "nimble"),
+        Map.of(
+            Modifier.Category.TOOL, new Modifier.CategoryData(1, List.of(
+                new Modifier.Entry(Attributes.BLOCK_BREAK_SPEED, 0.05, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             ))
         )
     ));
@@ -255,7 +284,7 @@ public class Modifiers {
     public static final Modifier POINTY = register(new Modifier(
         ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "pointy"),
         Map.of(
-            Modifier.Category.TOOL, new Modifier.CategoryData(1, List.of(
+            Modifier.Category.MELEE, new Modifier.CategoryData(1, List.of(
                 new Modifier.Entry(Attributes.ATTACK_DAMAGE, 0.10, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             ))
         )
@@ -263,8 +292,36 @@ public class Modifiers {
     public static final Modifier SHARP = register(new Modifier(
         ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "sharp"),
         Map.of(
-            Modifier.Category.TOOL, new Modifier.CategoryData(1, List.of(
+            Modifier.Category.MELEE, new Modifier.CategoryData(1, List.of(
                 new Modifier.Entry(Attributes.ATTACK_DAMAGE, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            ))
+        )
+    ));
+    public static final Modifier LIGHT = register(new Modifier(
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "light"),
+        Map.of(
+            Modifier.Category.MELEE, new Modifier.CategoryData(0, List.of(
+                new Modifier.Entry(Attributes.BLOCK_BREAK_SPEED, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(Attributes.ATTACK_SPEED, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            ))
+        )
+    ));
+    public static final Modifier HEAVY = register(new Modifier(
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "heavy"),
+        Map.of(
+            Modifier.Category.MELEE, new Modifier.CategoryData(0, List.of(
+                new Modifier.Entry(Attributes.BLOCK_BREAK_SPEED, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(Attributes.ATTACK_SPEED, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            ))
+        )
+    ));
+    public static final Modifier DULL = register(new Modifier(
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "dull"),
+        Map.of(
+            Modifier.Category.MELEE, new Modifier.CategoryData(-1, List.of(
+                new Modifier.Entry(Attributes.ATTACK_DAMAGE, -0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             ))
         )
     ));

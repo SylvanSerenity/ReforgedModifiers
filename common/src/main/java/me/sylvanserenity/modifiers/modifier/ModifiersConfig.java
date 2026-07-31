@@ -14,10 +14,36 @@ import me.sylvanserenity.modifiers.Constants;
 public class ModifiersConfig implements ConfigData {
     // Each value is either an item id (e.g. "minecraft:trident") or a tag (e.g. "#c:ingots/iron").
     private static final Map<Tier, String[]> TIER_DEFAULTS = new EnumMap<>(Map.ofEntries(
-        Map.entry(Tier.TIER_1, new String[] {"#c:ingots/iron", "#c:ingots/gold", "#c:ingots/copper"}),
-        Map.entry(Tier.TIER_2, new String[] {"minecraft:trident", "artifacts:plastic_drinking_hat", "artifacts:novelty_drinking_hat"}),
-        Map.entry(Tier.TIER_3, new String[] {"#c:gems/diamond", "minecraft:mace"}),
-        Map.entry(Tier.TIER_4, new String[] {"#c:ingots/netherite"})
+        Map.entry(Tier.TIER_1, new String[] {
+            "#c:ingots/iron",
+            "#c:ingots/gold",
+            "#c:ingots/copper",
+            "#artifacts:artifacts",
+        }),
+        Map.entry(Tier.TIER_2, new String[] {
+            "minecraft:trident",
+            "artifacts:vampiric_gloves",
+            "artifacts:chorus_totum",
+            "artifacts:lucky_scarf",
+            "artifacts:scarf_of_invisibility",
+            "artifacts:fire_gauntlet",
+            "artifacts:power_glove",
+            "artifacts:panic_necklace",
+            "artifacts:shock_pendant",
+            "artifacts:flame_pendant",
+            "artifacts:feral_claws",
+            "artifacts:running_shoes",
+        }),
+        Map.entry(Tier.TIER_3, new String[] {
+            "#c:gems/diamond",
+            "minecraft:mace",
+            "artifacts:cross_necklace",
+            "artifacts:withered_bracelet",
+            "artifacts:warp_drive",
+        }),
+        Map.entry(Tier.TIER_4, new String[] {
+            "#c:ingots/netherite",
+        })
     ));
 
     /* LOADED CONFIG VARIABLES */
@@ -25,8 +51,9 @@ public class ModifiersConfig implements ConfigData {
     public boolean armorCountsAsAccessory = false;
 
     @Comment("""
-        Item tiers, used to color modifier names.
-        Each entry is a list of item ids (e.g. "minecraft:trident") or tags (e.g. "#c:ingots/iron").
+    Item tiers used to color modifier names.
+    Each entry is a list of item ids (e.g. "minecraft:trident") or tags (e.g. "#c:ingots/iron").
+    Entries match items and repair ingredients.
     """)
     public Map<Tier, String[]> tiers = defaultTiers();
 

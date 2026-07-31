@@ -144,15 +144,6 @@ public class ModifierHandler {
     // Matches a config entry against the stack's repair ingredient or item type.
     // Entries starting with "#" are tag references; otherwise item ID.
     private static boolean matches(ItemStack stack, Ingredient repairIngredient, String id) {
-        // Match item ID.
-        Item target = BuiltInRegistries.ITEM.get(ResourceLocation.parse(id));
-        if (repairIngredient != null) {
-            for (ItemStack candidate : repairIngredient.getItems()) {
-                if (candidate.is(target)) return true;
-            }
-        }
-        if (stack.is(target)) return true;
-
         // Match tags.
         if (id.startsWith("#")) {
             TagKey<Item> tag = TagKey.create(Registries.ITEM, ResourceLocation.parse(id.substring(1)));
@@ -164,6 +155,13 @@ public class ModifierHandler {
             return stack.is(tag);
         }
 
-        return false;
+        // Match item ID.
+        Item target = BuiltInRegistries.ITEM.get(ResourceLocation.parse(id));
+        if (repairIngredient != null) {
+            for (ItemStack candidate : repairIngredient.getItems()) {
+                if (candidate.is(target)) return true;
+            }
+        }
+        return stack.is(target);
     }
 }

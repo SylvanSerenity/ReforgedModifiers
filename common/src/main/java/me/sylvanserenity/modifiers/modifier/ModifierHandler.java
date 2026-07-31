@@ -129,9 +129,13 @@ public class ModifierHandler {
             repairIngredient = armor.getMaterial().value().repairIngredient().get();
         }
 
-        for (Map.Entry<Tier, String[]> entry : ModifiersConfig.tiers().entrySet()) {
-            for (String id : entry.getValue()) {
-                if (matches(stack, repairIngredient, id)) return entry.getKey();
+        // Search from the highest tier down.
+        Map<Tier, String[]> tiers = ModifiersConfig.tiers();
+        Tier[] values = Tier.values();
+        for (int i = values.length - 1; i >= 0; i--) {
+            Tier tier = values[i];
+            for (String id : tiers.get(tier)) {
+                if (matches(stack, repairIngredient, id)) return tier;
             }
         }
         return Tier.DEFAULT;
@@ -140,6 +144,15 @@ public class ModifierHandler {
     // Matches a config entry against the stack's repair ingredient or item type.
     // Entries starting with "#" are tag references; otherwise item ID.
     private static boolean matches(ItemStack stack, Ingredient repairIngredient, String id) {
+        // Match item ID.
+        Item target = BuiltInRegistries.ITEM.get(ResourceLocation.parse(id));
+        if (repairIngredient != null) {
+            for (ItemStack candidate : repairIngredient.getItems()) {
+                if (candidate.is(target)) return true;
+            }
+        }
+        if (stack.is(target)) return true;
+
         // Match tags.
         if (id.startsWith("#")) {
             TagKey<Item> tag = TagKey.create(Registries.ITEM, ResourceLocation.parse(id.substring(1)));
@@ -151,13 +164,6 @@ public class ModifierHandler {
             return stack.is(tag);
         }
 
-        // Match item ID.
-        Item target = BuiltInRegistries.ITEM.get(ResourceLocation.parse(id));
-        if (repairIngredient != null) {
-            for (ItemStack candidate : repairIngredient.getItems()) {
-                if (candidate.is(target)) return true;
-            }
-        }
-        return stack.is(target);
+        return false;
     }
 }

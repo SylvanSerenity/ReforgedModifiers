@@ -22,7 +22,7 @@ public class ModifiersConfig implements ConfigData {
         }),
         Map.entry(Tier.TIER_2, new String[] {
             "minecraft:trident",
-            "artifacts:vampiric_gloves",
+            "artifacts:vampiric_glove",
             "artifacts:chorus_totum",
             "artifacts:lucky_scarf",
             "artifacts:scarf_of_invisibility",

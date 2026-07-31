@@ -24,6 +24,8 @@
   "modifier.modifiers.shoddy": "Shoddy",
   "modifier.modifiers.broken": "Broken",
   "modifier.modifiers.weak": "Weak",
+  "modifier.modifiers.light": "Light",
+  "modifier.modifiers.heavy": "Heavy",
   "modifier.modifiers.pointy": "Pointy",
   "modifier.modifiers.sharp": "Sharp"
 }

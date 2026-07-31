@@ -230,6 +230,26 @@ public class Modifiers {
             ))
         )
     ));
+    public static final Modifier LIGHT = register(new Modifier(
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "light"),
+        Map.of(
+            Modifier.Category.TOOL, new Modifier.CategoryData(0, List.of(
+                new Modifier.Entry(Attributes.BLOCK_BREAK_SPEED, .15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(Attributes.ATTACK_SPEED, .15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, -.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            ))
+        )
+    ));
+    public static final Modifier HEAVY = register(new Modifier(
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "heavy"),
+        Map.of(
+            Modifier.Category.TOOL, new Modifier.CategoryData(0, List.of(
+                new Modifier.Entry(Attributes.BLOCK_BREAK_SPEED, -.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(Attributes.ATTACK_SPEED, -.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, .15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            ))
+        )
+    ));
 
     /* MELEE MODIFIERS */
     public static final Modifier POINTY = register(new Modifier(

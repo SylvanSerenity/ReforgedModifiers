@@ -1,7 +1,6 @@
 package me.sylvanserenity.modifiers.modifier;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import me.sylvanserenity.modifiers.platform.Services;
@@ -130,7 +129,7 @@ public class ModifierHandler {
             repairIngredient = armor.getMaterial().value().repairIngredient().get();
         }
 
-        for (Map.Entry<Tier, List<String>> entry : ModifiersConfig.tiers().entrySet()) {
+        for (Map.Entry<Tier, String[]> entry : ModifiersConfig.tiers().entrySet()) {
             for (String id : entry.getValue()) {
                 if (matches(stack, repairIngredient, id)) return entry.getKey();
             }

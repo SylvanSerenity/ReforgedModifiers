@@ -1,5 +1,9 @@
 package me.sylvanserenity.modifiers.platform.services;
 
+import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
 
 public interface IPlatformHelper {
@@ -32,16 +36,31 @@ public interface IPlatformHelper {
      * @return The name of the environment type.
      */
     default String getEnvironmentName() {
-
         return isDevelopmentEnvironment() ? "development" : "production";
     }
 
     /**
-     * Dedupes Artifacts' own attribute-modifier data component on the given stack, if Artifacts
-     * is present on this platform. No-op on platforms without an Artifacts build to compile against.
+     * Grants an attribute modifier through the platform's native accessory-slot API (e.g. Accessories
+     * on Fabric) rather than the vanilla attribute component, for curio/accessory-slot items whose
+     * bonus shouldn't rely on vanilla equipment-slot attribute matching. No-op on platforms that don't
+     * need this (e.g. NeoForge, where CuriosCompat grants the bonus reactively via the applied
+     * modifier's id instead of a persisted attribute write).
      *
-     * @param stack The stack to clean up.
+     * @param stack     The item stack to grant the modifier on.
+     * @param modId     The unique id for this specific attribute entry (attribute + modifier).
+     * @param attribute The attribute to modify.
+     * @param amount    The modifier's amount.
+     * @param operation The modifier's operation.
      */
-    default void dedupeArtifactsAttributes(ItemStack stack) {
-    }
+    default void applyAccessoryAttribute(ItemStack stack, ResourceLocation modId, Holder<Attribute> attribute, double amount, AttributeModifier.Operation operation) {}
+
+    /**
+     * Reverses {@link #applyAccessoryAttribute}, removing the previously-granted modifier by its id.
+     * No-op on platforms that don't need this (see applyAccessoryAttribute).
+     *
+     * @param stack     The item stack to remove the modifier from.
+     * @param modId     The same id previously passed to applyAccessoryAttribute.
+     * @param attribute The attribute that was modified.
+     */
+    default void removeAccessoryAttribute(ItemStack stack, ResourceLocation modId, Holder<Attribute> attribute) {}
 }

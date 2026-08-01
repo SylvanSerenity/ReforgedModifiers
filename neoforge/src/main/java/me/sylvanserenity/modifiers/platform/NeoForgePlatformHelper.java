@@ -1,6 +1,5 @@
 package me.sylvanserenity.modifiers.platform;
 
-import me.sylvanserenity.modifiers.compat.ArtifactsCompat;
 import me.sylvanserenity.modifiers.platform.services.IPlatformHelper;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.fml.ModList;
@@ -20,10 +19,5 @@ public class NeoForgePlatformHelper implements IPlatformHelper {
     @Override
     public boolean isDevelopmentEnvironment() {
         return !FMLLoader.isProduction();
-    }
-
-    @Override
-    public void dedupeArtifactsAttributes(ItemStack stack) {
-        ArtifactsCompat.dedupeAttributes(stack);
     }
 }

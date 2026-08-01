@@ -30,6 +30,9 @@ dependencies {
     // Artifacts.
     modCompileOnly "maven.modrinth:P0Mu4wcQ:WTnRdeH6"
 
+    // Accessories (Fabric's equivalent of NeoForge's Curios API) - optional, guarded at runtime.
+    modCompileOnly "maven.modrinth:jtmvUHXj:Xlt4eWBe"
+
     // Cloth Config
     modImplementation "maven.modrinth:9s6osm5g:HpMb5wGb"
 }

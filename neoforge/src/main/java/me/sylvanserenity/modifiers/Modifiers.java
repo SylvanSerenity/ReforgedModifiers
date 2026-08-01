@@ -15,8 +15,7 @@ public class Modifiers {
         CommonClass.init();
         NeoForge.EVENT_BUS.addListener(this::onRegisterCommands);
 
-        // Curios is an optional dependency - only touch CuriosCompat (which references Curios'
-        // own classes) if Curios is actually loaded, or this throws NoClassDefFoundError.
+        // Curios compatibility.
         if (Services.PLATFORM.isModLoaded("curios")) {
             NeoForge.EVENT_BUS.register(CuriosCompat.class);
         }

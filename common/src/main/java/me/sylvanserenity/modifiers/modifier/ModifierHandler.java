@@ -4,6 +4,7 @@ import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 import me.sylvanserenity.modifiers.platform.Services;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
@@ -30,8 +31,10 @@ import net.minecraft.world.item.crafting.Ingredient;
 public class ModifierHandler {
     public static final int BASE_TIER = Tier.DEFAULT.ordinal();
 
-    // Custom NBT key tracking which modifier is applied.
+    // Custom NBT keys tracking which modifier is applied, and a per-stack random id used to keep this
+    // stack's AttributeModifier ids unique from every other stack's (see buildAttributeModifierId).
     private static final String MODIFIER_ID_KEY = "ReforgedModifiersModifier";
+    private static final String INSTANCE_ID_KEY = "ReforgedModifiersInstance";
 
     public static void apply(ItemStack stack, Modifier mod) {
         Set<Modifier.Category> categories = getItemCategories(stack);
@@ -41,7 +44,7 @@ public class ModifierHandler {
         ItemAttributeModifiers mods = ItemAttributeModifiers.EMPTY;
         Set<Holder<Attribute>> seenFromModifier = new HashSet<>();
         for (Modifier.Entry e : mod.entries(categories)) {
-            ResourceLocation modId = mod.id().withSuffix("/" + e.attr().unwrapKey().orElseThrow().location().getPath());
+            ResourceLocation modId = buildAttributeModifierId(stack, mod, e.attr());
             if (useNativeAccessoryApi) {
                 Services.PLATFORM.applyAccessoryAttribute(stack, modId, e.attr(), e.amount(), e.op());
             } else if (seenFromModifier.add(e.attr())) {
@@ -85,8 +88,7 @@ public class ModifierHandler {
         if (isAccessory(stack)) {
             Set<Modifier.Category> categories = getItemCategories(stack);
             for (Modifier.Entry e : mod.entries(categories)) {
-                ResourceLocation modId = mod.id().withSuffix("/" + e.attr().unwrapKey().orElseThrow().location().getPath());
-                Services.PLATFORM.removeAccessoryAttribute(stack, modId, e.attr());
+                Services.PLATFORM.removeAccessoryAttribute(stack, buildAttributeModifierId(stack, mod, e.attr()), e.attr());
             }
         }
 
@@ -154,6 +156,26 @@ public class ModifierHandler {
         }
 
         return false;
+    }
+
+    // Builds a stable, per-stack-unique AttributeModifier id for one of this modifier's entries. Two
+    // different stacks bearing the same modifier (e.g. two "Warding" rings) must not share an id -
+    // Curios/vanilla attribute stacking treats same-id modifiers as one shared instance, so without
+    // this only one ring would ever contribute, and removing either would remove it for both.
+    // Called both when creating entries (apply/remove) and reactively (NeoForge's CuriosCompat), so
+    // it must be public and produce the same id every time for the same stack.
+    public static ResourceLocation buildAttributeModifierId(ItemStack stack, Modifier mod, Holder<Attribute> attribute) {
+        String instanceId = getOrCreateInstanceId(stack);
+        return mod.id().withSuffix("/" + attribute.unwrapKey().orElseThrow().location().getPath() + "/" + instanceId);
+    }
+
+    private static String getOrCreateInstanceId(ItemStack stack) {
+        CustomData data = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
+        if (data.contains(INSTANCE_ID_KEY)) return data.copyTag().getString(INSTANCE_ID_KEY);
+
+        String id = UUID.randomUUID().toString();
+        CustomData.update(DataComponents.CUSTOM_DATA, stack, tag -> tag.putString(INSTANCE_ID_KEY, id));
+        return id;
     }
 
     // Recovers which registered Modifier (if any) is currently applied to the stack. Read from

@@ -10,9 +10,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-// Fabric has no built-in "item crafted" event (unlike NeoForge's PlayerEvent.ItemCraftedEvent, see
-// CraftingCompat), so this hooks the same vanilla callback NeoForge's ResultSlot ultimately calls.
-// No vanilla Item subclass overrides onCraftedBy, so a single injection here covers every item.
+// Hooks the vanilla per-item crafting callback directly rather than relying on a loader-specific
+// event (e.g. NeoForge's PlayerEvent.ItemCraftedEvent doesn't reliably fire for the shift-click
+// quick-move bulk-craft path) - onCraftedBy is called by ResultSlot#checkTakeAchievements for every
+// way of taking a crafted result on both loaders, and no vanilla Item subclass overrides it, so a
+// single injection here covers every item and every crafting interaction uniformly.
 @Mixin(Item.class)
 public class ItemMixin {
     @Inject(method = "onCraftedBy", at = @At("TAIL"))

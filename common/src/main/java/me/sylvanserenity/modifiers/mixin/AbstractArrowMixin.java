@@ -32,9 +32,19 @@ public abstract class AbstractArrowMixin {
     @ModifyVariable(method = "doKnockback", at = @At("STORE"), ordinal = 0)
     private double modifiers$knockback(double strength) {
         AbstractArrow self = (AbstractArrow) (Object) this;
-        if (!(self.getOwner() instanceof LivingEntity shooter)) return strength;
+        double result = strength;
 
-        AttributeInstance attribute = shooter.getAttribute(ModAttributes.KNOCKBACK);
-        return attribute != null ? strength * attribute.getValue() : strength;
+        if (self.getOwner() instanceof LivingEntity shooter) {
+            AttributeInstance attribute = shooter.getAttribute(ModAttributes.KNOCKBACK);
+            if (attribute != null) {
+                result += ModifiersConfig.baseRangedKnockback() * (attribute.getValue() - 1.0);
+            }
+        }
+
+        if (self.isCritArrow()) {
+            result *= 1.0 + ModifiersConfig.criticalKnockbackMultiplier();
+        }
+
+        return result;
     }
 }

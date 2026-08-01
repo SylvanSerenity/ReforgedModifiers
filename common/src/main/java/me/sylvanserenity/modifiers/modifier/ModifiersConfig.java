@@ -19,6 +19,8 @@ public class ModifiersConfig implements ConfigData {
             "#c:ingots/iron",
             "#c:ingots/gold",
             "#c:ingots/copper",
+            "#c:tools/bow",
+            "#c:tools/crossbow",
             "#artifacts:artifacts",
         }),
         Map.entry(Tier.TIER_2, new String[] {
@@ -67,6 +69,13 @@ public class ModifiersConfig implements ConfigData {
     public double criticalKnockbackMultiplier = 0.4;
 
     @Comment("""
+    Knockback strength of a +100% KNOCKBACK attribute.
+    Added on top of Punch's knockback.
+    Default 0.5; vanilla Punch I contributes 1.0 for reference.
+    """)
+    public double baseRangedKnockback = 0.5;
+
+    @Comment("""
     Item tiers used to color modifier names.
     Each entry is a list of item ids (e.g. "minecraft:trident") or tags (e.g. "#c:ingots/iron").
     Entries match items and repair ingredients.
@@ -101,6 +110,10 @@ public class ModifiersConfig implements ConfigData {
 
     public static double criticalKnockbackMultiplier() {
         return AutoConfig.getConfigHolder(ModifiersConfig.class).getConfig().criticalKnockbackMultiplier;
+    }
+
+    public static double baseRangedKnockback() {
+        return AutoConfig.getConfigHolder(ModifiersConfig.class).getConfig().baseRangedKnockback;
     }
 
     public static double defaultCriticalChance() {

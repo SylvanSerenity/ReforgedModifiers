@@ -12,8 +12,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(CrossbowItem.class)
 public abstract class CrossbowItemMixin {
-    // Not player-gated, same as BowItemMixin. getChargeDuration also determines getUseDuration, so this
-    // alone speeds up the whole charge.
     @Inject(method = "getChargeDuration", at = @At("RETURN"), cancellable = true)
     private static void modifiers$loadSpeed(ItemStack stack, LivingEntity shooter, CallbackInfoReturnable<Integer> cir) {
         AttributeInstance attribute = shooter.getAttribute(ModAttributes.LOAD_SPEED);

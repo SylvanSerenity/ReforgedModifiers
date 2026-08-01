@@ -14,10 +14,6 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(ProjectileWeaponItem.class)
 public abstract class ProjectileWeaponItemMixin {
-    // Not player-gated - any mob with a PROJECTILE_VELOCITY attribute instance (see
-    // LivingEntityAttributesMixin) benefits too. The shooter is captured by appending it to the
-    // target method's own args (native Mixin support), rather than via MixinExtras' @Local sugar,
-    // which doesn't reliably combine with @ModifyVariable in this Mixin version.
     @ModifyVariable(method = "shoot", at = @At("HEAD"), ordinal = 0, argsOnly = true)
     private float modifiers$projectileVelocity(float velocity, ServerLevel level, LivingEntity shooter) {
         AttributeInstance attribute = shooter.getAttribute(ModAttributes.PROJECTILE_VELOCITY);

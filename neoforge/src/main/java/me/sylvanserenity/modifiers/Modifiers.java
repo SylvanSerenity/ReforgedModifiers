@@ -27,8 +27,8 @@ public class Modifiers {
         ATTRIBUTES.register("critical_chance", ModAttributes::createCriticalChanceAttribute);
     private static final DeferredHolder<Attribute, Attribute> PROJECTILE_VELOCITY =
         ATTRIBUTES.register("projectile_velocity", ModAttributes::createProjectileVelocityAttribute);
-    private static final DeferredHolder<Attribute, Attribute> LOAD_SPEED =
-        ATTRIBUTES.register("load_speed", ModAttributes::createLoadSpeedAttribute);
+    private static final DeferredHolder<Attribute, Attribute> DRAW_SPEED =
+        ATTRIBUTES.register("draw_speed", ModAttributes::createLoadSpeedAttribute);
     private static final DeferredHolder<Attribute, Attribute> PROJECTILE_DAMAGE =
         ATTRIBUTES.register("projectile_damage", ModAttributes::createProjectileDamageAttribute);
     private static final DeferredHolder<Attribute, Attribute> KNOCKBACK =
@@ -37,7 +37,7 @@ public class Modifiers {
     public Modifiers(IEventBus eventBus) {
         ModAttributes.CRITICAL_CHANCE = CRITICAL_CHANCE;
         ModAttributes.PROJECTILE_VELOCITY = PROJECTILE_VELOCITY;
-        ModAttributes.LOAD_SPEED = LOAD_SPEED;
+        ModAttributes.DRAW_SPEED = DRAW_SPEED;
         ModAttributes.PROJECTILE_DAMAGE = PROJECTILE_DAMAGE;
         ModAttributes.KNOCKBACK = KNOCKBACK;
         ATTRIBUTES.register(eventBus);

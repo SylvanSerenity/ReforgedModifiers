@@ -22,8 +22,8 @@ public class Modifiers implements ModInitializer {
         ModAttributes.PROJECTILE_VELOCITY = Registry.registerForHolder(
             BuiltInRegistries.ATTRIBUTE, ModAttributes.PROJECTILE_VELOCITY_KEY, ModAttributes.createProjectileVelocityAttribute()
         );
-        ModAttributes.LOAD_SPEED = Registry.registerForHolder(
-            BuiltInRegistries.ATTRIBUTE, ModAttributes.LOAD_SPEED_KEY, ModAttributes.createLoadSpeedAttribute()
+        ModAttributes.DRAW_SPEED = Registry.registerForHolder(
+            BuiltInRegistries.ATTRIBUTE, ModAttributes.DRAW_SPEED_KEY, ModAttributes.createLoadSpeedAttribute()
         );
         ModAttributes.PROJECTILE_DAMAGE = Registry.registerForHolder(
             BuiltInRegistries.ATTRIBUTE, ModAttributes.PROJECTILE_DAMAGE_KEY, ModAttributes.createProjectileDamageAttribute()

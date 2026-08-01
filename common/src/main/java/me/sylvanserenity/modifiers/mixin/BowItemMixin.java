@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 public abstract class BowItemMixin {
     @ModifyVariable(method = "releaseUsing", at = @At(value = "STORE", ordinal = 0), ordinal = 1)
     private int modifiers$loadSpeed(int elapsedTicks, ItemStack stack, Level level, LivingEntity shooter) {
-        AttributeInstance attribute = shooter.getAttribute(ModAttributes.LOAD_SPEED);
+        AttributeInstance attribute = shooter.getAttribute(ModAttributes.DRAW_SPEED);
         return attribute != null ? Math.round(elapsedTicks * (float) attribute.getValue()) : elapsedTicks;
     }
 }

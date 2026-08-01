@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class CrossbowItemMixin {
     @Inject(method = "getChargeDuration", at = @At("RETURN"), cancellable = true)
     private static void modifiers$loadSpeed(ItemStack stack, LivingEntity shooter, CallbackInfoReturnable<Integer> cir) {
-        AttributeInstance attribute = shooter.getAttribute(ModAttributes.LOAD_SPEED);
+        AttributeInstance attribute = shooter.getAttribute(ModAttributes.DRAW_SPEED);
         if (attribute == null) return;
 
         cir.setReturnValue(Math.max(1, Math.round(cir.getReturnValue() / (float) attribute.getValue())));

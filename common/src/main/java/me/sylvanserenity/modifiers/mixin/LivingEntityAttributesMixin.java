@@ -15,7 +15,7 @@ public abstract class LivingEntityAttributesMixin {
         AttributeSupplier.Builder builder = cir.getReturnValue();
         if (ModAttributes.CRITICAL_CHANCE != null) builder.add(ModAttributes.CRITICAL_CHANCE);
         if (ModAttributes.PROJECTILE_VELOCITY != null) builder.add(ModAttributes.PROJECTILE_VELOCITY);
-        if (ModAttributes.LOAD_SPEED != null) builder.add(ModAttributes.LOAD_SPEED);
+        if (ModAttributes.DRAW_SPEED != null) builder.add(ModAttributes.DRAW_SPEED);
         if (ModAttributes.PROJECTILE_DAMAGE != null) builder.add(ModAttributes.PROJECTILE_DAMAGE);
         if (ModAttributes.KNOCKBACK != null) builder.add(ModAttributes.KNOCKBACK);
     }

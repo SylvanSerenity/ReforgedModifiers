@@ -15,8 +15,8 @@ public class ModAttributes {
     public static final ResourceKey<Attribute> PROJECTILE_VELOCITY_KEY = ResourceKey.create(
         Registries.ATTRIBUTE, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "projectile_velocity")
     );
-    public static final ResourceKey<Attribute> LOAD_SPEED_KEY = ResourceKey.create(
-        Registries.ATTRIBUTE, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "load_speed")
+    public static final ResourceKey<Attribute> DRAW_SPEED_KEY = ResourceKey.create(
+        Registries.ATTRIBUTE, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "draw_speed")
     );
     public static final ResourceKey<Attribute> PROJECTILE_DAMAGE_KEY = ResourceKey.create(
         Registries.ATTRIBUTE, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "projectile_damage")
@@ -27,7 +27,7 @@ public class ModAttributes {
 
     public static Holder<Attribute> CRITICAL_CHANCE;
     public static Holder<Attribute> PROJECTILE_VELOCITY;
-    public static Holder<Attribute> LOAD_SPEED;
+    public static Holder<Attribute> DRAW_SPEED;
     public static Holder<Attribute> PROJECTILE_DAMAGE;
     public static Holder<Attribute> KNOCKBACK;
 
@@ -40,7 +40,7 @@ public class ModAttributes {
     }
 
     public static Attribute createLoadSpeedAttribute() {
-        return new RangedAttribute("attribute." + Constants.MOD_ID + ".load_speed", 1.0, 0.0, 1024.0).setSyncable(true);
+        return new RangedAttribute("attribute." + Constants.MOD_ID + ".draw_speed", 1.0, 0.0, 1024.0).setSyncable(true);
     }
 
     public static Attribute createProjectileDamageAttribute() {

@@ -1,7 +1,7 @@
 {
   "attribute.modifiers.critical_chance": "Critical Strike Chance",
   "attribute.modifiers.projectile_velocity": "Projectile Velocity",
-  "attribute.modifiers.load_speed": "Load Speed",
+  "attribute.modifiers.draw_speed": "Draw Speed",
   "attribute.modifiers.projectile_damage": "Projectile Damage",
   "attribute.modifiers.knockback": "Knockback",
   "modifier.modifiers.hard": "Hard",

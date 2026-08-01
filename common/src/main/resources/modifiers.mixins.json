@@ -5,8 +5,14 @@
   "refmap": "${mod_id}.refmap.json",
   "compatibilityLevel": "JAVA_18",
   "mixins": [
+    "AbstractArrowMixin",
+    "BowItemMixin",
+    "CrossbowItemMixin",
     "ItemMixin",
-    "LootTableMixin"
+    "LivingEntityAttributesMixin",
+    "LootTableMixin",
+    "ProjectileWeaponItemMixin",
+    "ThrownTridentMixin"
   ],
   "client": [],
   "server": [],

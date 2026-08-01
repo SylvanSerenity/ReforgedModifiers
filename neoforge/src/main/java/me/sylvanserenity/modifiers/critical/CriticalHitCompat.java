@@ -1,6 +1,8 @@
 package me.sylvanserenity.modifiers.critical;
 
 import me.sylvanserenity.modifiers.modifier.CriticalHitTracker;
+import me.sylvanserenity.modifiers.modifier.KnockbackTracker;
+import me.sylvanserenity.modifiers.modifier.ModAttributes;
 import me.sylvanserenity.modifiers.modifier.ModifierHandler;
 import me.sylvanserenity.modifiers.modifier.ModifiersConfig;
 import net.minecraft.world.entity.player.Player;
@@ -12,6 +14,11 @@ public class CriticalHitCompat {
     @SubscribeEvent
     public static void onCriticalHit(CriticalHitEvent event) {
         Player player = event.getEntity();
+
+        // Stashed unconditionally (not just on crit) so onKnockback can apply it regardless of whether
+        // this particular hit also happens to be a critical.
+        KnockbackTracker.markKnockback(event.getTarget().getId(), (float) player.getAttributeValue(ModAttributes.KNOCKBACK));
+
         float chance = ModifierHandler.getCriticalChance(player);
         boolean roll = chance > 0.0F && player.getRandom().nextFloat() < chance;
 
@@ -26,6 +33,7 @@ public class CriticalHitCompat {
 
     @SubscribeEvent
     public static void onKnockback(LivingKnockBackEvent event) {
+        event.setStrength(event.getStrength() * KnockbackTracker.consumeKnockback(event.getEntity().getId()));
         if (CriticalHitTracker.consumeCritical(event.getEntity().getId())) {
             event.setStrength((float) (event.getStrength() * (1.0 + ModifiersConfig.criticalKnockbackMultiplier())));
         }

@@ -1,5 +1,9 @@
 {
   "attribute.modifiers.critical_chance": "Critical Strike Chance",
+  "attribute.modifiers.projectile_velocity": "Projectile Velocity",
+  "attribute.modifiers.load_speed": "Load Speed",
+  "attribute.modifiers.projectile_damage": "Projectile Damage",
+  "attribute.modifiers.knockback": "Knockback",
   "modifier.modifiers.hard": "Hard",
   "modifier.modifiers.guarding": "Guarding",
   "modifier.modifiers.armored": "Armored",
@@ -56,5 +60,15 @@
   "modifier.modifiers.heavy": "Heavy",
   "modifier.modifiers.dull": "Dull",
   "modifier.modifiers.dangerous": "Dangerous",
-  "modifier.modifiers.legendary": "Legendary"
+  "modifier.modifiers.legendary": "Legendary",
+  "modifier.modifiers.sighted": "Sighted",
+  "modifier.modifiers.rapid": "Rapid",
+  "modifier.modifiers.intimidating": "Intimidating",
+  "modifier.modifiers.staunch": "Staunch",
+  "modifier.modifiers.awful": "Awful",
+  "modifier.modifiers.lethargic": "Lethargic",
+  "modifier.modifiers.awkward": "Awkward",
+  "modifier.modifiers.powerful": "Powerful",
+  "modifier.modifiers.frenzying": "Frenzying",
+  "modifier.modifiers.unreal": "Unreal"
 }

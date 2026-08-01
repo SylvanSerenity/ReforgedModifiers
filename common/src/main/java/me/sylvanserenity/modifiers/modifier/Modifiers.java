@@ -85,9 +85,12 @@ public class Modifiers {
         Map.of(
             Modifier.Category.ACCESSORY, new Modifier.CategoryData(1, List.of(
                 new Modifier.Entry(Attributes.MOVEMENT_SPEED, 0.03, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.ARMOR)
+            )),
+            Modifier.Category.RANGED, new Modifier.CategoryData(2, List.of(
+                new Modifier.Entry(ModAttributes.LOAD_SPEED, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.PROJECTILE_VELOCITY, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             ))
         )
-        // TODO Ranged
     ));
     public static final Modifier QUICK = register(new Modifier(
         ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "quick"),
@@ -174,6 +177,9 @@ public class Modifiers {
     public static final Modifier KEEN = register(new Modifier(
         ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "keen"),
         Map.of(
+            Modifier.Category.MELEE, new Modifier.CategoryData(1, List.of(
+                new Modifier.Entry(ModAttributes.CRITICAL_CHANCE, 3.0, AttributeModifier.Operation.ADD_VALUE, EquipmentSlotGroup.MAINHAND)
+            )),
             Modifier.Category.TOOL, new Modifier.CategoryData(1, List.of(
                 new Modifier.Entry(ModAttributes.CRITICAL_CHANCE, 3.0, AttributeModifier.Operation.ADD_VALUE, EquipmentSlotGroup.MAINHAND)
             ))
@@ -182,6 +188,9 @@ public class Modifiers {
     public static final Modifier ZEALOUS = register(new Modifier(
         ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "zealous"),
         Map.of(
+            Modifier.Category.MELEE, new Modifier.CategoryData(1, List.of(
+                new Modifier.Entry(ModAttributes.CRITICAL_CHANCE, 5.0, AttributeModifier.Operation.ADD_VALUE, EquipmentSlotGroup.MAINHAND)
+            )),
             Modifier.Category.TOOL, new Modifier.CategoryData(1, List.of(
                 new Modifier.Entry(ModAttributes.CRITICAL_CHANCE, 5.0, AttributeModifier.Operation.ADD_VALUE, EquipmentSlotGroup.MAINHAND)
             ))
@@ -190,29 +199,57 @@ public class Modifiers {
     public static final Modifier SUPERIOR = register(new Modifier(
         ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "superior"),
         Map.of(
-            Modifier.Category.TOOL, new Modifier.CategoryData(2, List.of(
-                new Modifier.Entry(ModAttributes.CRITICAL_CHANCE, 3.0, AttributeModifier.Operation.ADD_VALUE, EquipmentSlotGroup.MAINHAND),
+            Modifier.Category.MELEE, new Modifier.CategoryData(2, List.of(
                 new Modifier.Entry(Attributes.ATTACK_DAMAGE, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+                new Modifier.Entry(ModAttributes.CRITICAL_CHANCE, 3.0, AttributeModifier.Operation.ADD_VALUE, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.KNOCKBACK, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            )),
+            Modifier.Category.RANGED, new Modifier.CategoryData(2, List.of(
+                new Modifier.Entry(ModAttributes.PROJECTILE_DAMAGE, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.CRITICAL_CHANCE, 3.0, AttributeModifier.Operation.ADD_VALUE, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.KNOCKBACK, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            )),
+            Modifier.Category.TOOL, new Modifier.CategoryData(2, List.of(
+                new Modifier.Entry(Attributes.ATTACK_DAMAGE, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.CRITICAL_CHANCE, 3.0, AttributeModifier.Operation.ADD_VALUE, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.KNOCKBACK, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             ))
         )
     ));
     public static final Modifier DEMONIC = register(new Modifier(
         ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "demonic"),
         Map.of(
+            Modifier.Category.MELEE, new Modifier.CategoryData(2, List.of(
+                new Modifier.Entry(Attributes.ATTACK_DAMAGE, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.CRITICAL_CHANCE, 5.0, AttributeModifier.Operation.ADD_VALUE, EquipmentSlotGroup.MAINHAND)
+            )),
+            Modifier.Category.RANGED, new Modifier.CategoryData(2, List.of(
+                new Modifier.Entry(ModAttributes.PROJECTILE_DAMAGE, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.CRITICAL_CHANCE, 5.0, AttributeModifier.Operation.ADD_VALUE, EquipmentSlotGroup.MAINHAND)
+            )),
             Modifier.Category.TOOL, new Modifier.CategoryData(2, List.of(
-                new Modifier.Entry(ModAttributes.CRITICAL_CHANCE, 5.0, AttributeModifier.Operation.ADD_VALUE, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_DAMAGE, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+                new Modifier.Entry(Attributes.ATTACK_DAMAGE, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.CRITICAL_CHANCE, 5.0, AttributeModifier.Operation.ADD_VALUE, EquipmentSlotGroup.MAINHAND)
             ))
         )
     ));
     public static final Modifier GODLY = register(new Modifier(
         ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "godly"),
         Map.of(
-            Modifier.Category.TOOL, new Modifier.CategoryData(2, List.of(
-                new Modifier.Entry(ModAttributes.CRITICAL_CHANCE, 5.0, AttributeModifier.Operation.ADD_VALUE, EquipmentSlotGroup.MAINHAND),
+            Modifier.Category.MELEE, new Modifier.CategoryData(2, List.of(
                 new Modifier.Entry(Attributes.ATTACK_DAMAGE, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+                new Modifier.Entry(ModAttributes.CRITICAL_CHANCE, 5.0, AttributeModifier.Operation.ADD_VALUE, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.KNOCKBACK, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            )),
+            Modifier.Category.RANGED, new Modifier.CategoryData(2, List.of(
+                new Modifier.Entry(ModAttributes.PROJECTILE_DAMAGE, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.CRITICAL_CHANCE, 5.0, AttributeModifier.Operation.ADD_VALUE, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.KNOCKBACK, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            )),
+            Modifier.Category.TOOL, new Modifier.CategoryData(2, List.of(
+                new Modifier.Entry(Attributes.ATTACK_DAMAGE, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.CRITICAL_CHANCE, 5.0, AttributeModifier.Operation.ADD_VALUE, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.KNOCKBACK, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             ))
         )
     ));
@@ -221,6 +258,9 @@ public class Modifiers {
         Map.of(
             Modifier.Category.MELEE, new Modifier.CategoryData(-1, List.of(
                 new Modifier.Entry(Attributes.ATTACK_SPEED, -0.08, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            )),
+            Modifier.Category.RANGED, new Modifier.CategoryData(-1, List.of(
+                new Modifier.Entry(ModAttributes.LOAD_SPEED, -0.08, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             )),
             Modifier.Category.TOOL, new Modifier.CategoryData(-1, List.of(
                 new Modifier.Entry(Attributes.BLOCK_BREAK_SPEED, -0.08, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
@@ -233,6 +273,9 @@ public class Modifiers {
             Modifier.Category.MELEE, new Modifier.CategoryData(-1, List.of(
                 new Modifier.Entry(Attributes.ATTACK_SPEED, -0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             )),
+            Modifier.Category.RANGED, new Modifier.CategoryData(-1, List.of(
+                new Modifier.Entry(ModAttributes.LOAD_SPEED, -0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            )),
             Modifier.Category.TOOL, new Modifier.CategoryData(-1, List.of(
                 new Modifier.Entry(Attributes.BLOCK_BREAK_SPEED, -0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             ))
@@ -243,6 +286,9 @@ public class Modifiers {
         Map.of(
             Modifier.Category.MELEE, new Modifier.CategoryData(-2, List.of(
                 new Modifier.Entry(Attributes.ATTACK_SPEED, -0.2, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            )),
+            Modifier.Category.RANGED, new Modifier.CategoryData(-2, List.of(
+                new Modifier.Entry(ModAttributes.LOAD_SPEED, -0.2, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             )),
             Modifier.Category.TOOL, new Modifier.CategoryData(-2, List.of(
                 new Modifier.Entry(Attributes.BLOCK_BREAK_SPEED, -0.2, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
@@ -256,15 +302,25 @@ public class Modifiers {
                 new Modifier.Entry(Attributes.ATTACK_SPEED, -0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
                 new Modifier.Entry(Attributes.ATTACK_DAMAGE, -0.2, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             )),
+            Modifier.Category.RANGED, new Modifier.CategoryData(-2, List.of(
+                new Modifier.Entry(ModAttributes.PROJECTILE_DAMAGE, -0.2, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.LOAD_SPEED, -0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            )),
             Modifier.Category.TOOL, new Modifier.CategoryData(-2, List.of(
-                new Modifier.Entry(Attributes.BLOCK_BREAK_SPEED, -0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_DAMAGE, -0.2, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+                new Modifier.Entry(Attributes.ATTACK_DAMAGE, -0.2, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(Attributes.BLOCK_BREAK_SPEED, -0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             ))
         )
     ));
     public static final Modifier DAMAGED = register(new Modifier(
         ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "damaged"),
         Map.of(
+            Modifier.Category.MELEE, new Modifier.CategoryData(-1, List.of(
+                new Modifier.Entry(Attributes.ATTACK_DAMAGE, -0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            )),
+            Modifier.Category.RANGED, new Modifier.CategoryData(-1, List.of(
+                new Modifier.Entry(ModAttributes.PROJECTILE_DAMAGE, -0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            )),
             Modifier.Category.TOOL, new Modifier.CategoryData(-1, List.of(
                 new Modifier.Entry(Attributes.ATTACK_DAMAGE, -0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             ))
@@ -273,40 +329,68 @@ public class Modifiers {
     public static final Modifier SHODDY = register(new Modifier(
         ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "shoddy"),
         Map.of(
+            Modifier.Category.MELEE, new Modifier.CategoryData(-2, List.of(
+                new Modifier.Entry(Attributes.ATTACK_DAMAGE, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.KNOCKBACK, -0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            )),
+            Modifier.Category.RANGED, new Modifier.CategoryData(-2, List.of(
+                new Modifier.Entry(ModAttributes.PROJECTILE_DAMAGE, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.KNOCKBACK, -0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            )),
             Modifier.Category.TOOL, new Modifier.CategoryData(-2, List.of(
                 new Modifier.Entry(Attributes.ATTACK_DAMAGE, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, -0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+                new Modifier.Entry(ModAttributes.KNOCKBACK, -0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             ))
         )
     ));
     public static final Modifier BROKEN = register(new Modifier(
         ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "broken"),
         Map.of(
+            Modifier.Category.MELEE, new Modifier.CategoryData(-2, List.of(
+                new Modifier.Entry(Attributes.ATTACK_DAMAGE, -0.3, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.KNOCKBACK, -0.2, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            )),
+            Modifier.Category.RANGED, new Modifier.CategoryData(-2, List.of(
+                new Modifier.Entry(ModAttributes.PROJECTILE_DAMAGE, -0.3, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.KNOCKBACK, -0.2, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            )),
             Modifier.Category.TOOL, new Modifier.CategoryData(-2, List.of(
                 new Modifier.Entry(Attributes.ATTACK_DAMAGE, -0.3, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, -0.2, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+                new Modifier.Entry(ModAttributes.KNOCKBACK, -0.2, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             ))
         )
     ));
     public static final Modifier WEAK = register(new Modifier(
         ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "weak"),
         Map.of(
+            Modifier.Category.MELEE, new Modifier.CategoryData(-2, List.of(
+                new Modifier.Entry(ModAttributes.KNOCKBACK, -0.2, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            )),
             Modifier.Category.TOOL, new Modifier.CategoryData(-2, List.of(
-                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, -0.2, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+                new Modifier.Entry(ModAttributes.KNOCKBACK, -0.2, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             ))
         )
     ));
     public static final Modifier STRONG = register(new Modifier(
         ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "strong"),
         Map.of(
+            Modifier.Category.MELEE, new Modifier.CategoryData(1, List.of(
+                new Modifier.Entry(ModAttributes.KNOCKBACK, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            )),
             Modifier.Category.TOOL, new Modifier.CategoryData(1, List.of(
-                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+                new Modifier.Entry(ModAttributes.KNOCKBACK, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             ))
         )
     ));
     public static final Modifier HURTFUL = register(new Modifier(
         ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "hurtful"),
         Map.of(
+            Modifier.Category.MELEE, new Modifier.CategoryData(1, List.of(
+                new Modifier.Entry(Attributes.ATTACK_DAMAGE, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            )),
+            Modifier.Category.RANGED, new Modifier.CategoryData(1, List.of(
+                new Modifier.Entry(ModAttributes.PROJECTILE_DAMAGE, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            )),
             Modifier.Category.TOOL, new Modifier.CategoryData(1, List.of(
                 new Modifier.Entry(Attributes.ATTACK_DAMAGE, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             ))
@@ -315,36 +399,61 @@ public class Modifiers {
     public static final Modifier FORCEFUL = register(new Modifier(
         ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "forceful"),
         Map.of(
+            Modifier.Category.MELEE, new Modifier.CategoryData(1, List.of(
+                new Modifier.Entry(ModAttributes.KNOCKBACK, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            )),
             Modifier.Category.TOOL, new Modifier.CategoryData(1, List.of(
-                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+                new Modifier.Entry(ModAttributes.KNOCKBACK, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             ))
         )
     ));
     public static final Modifier UNPLEASANT = register(new Modifier(
         ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "unpleasant"),
         Map.of(
+            Modifier.Category.MELEE, new Modifier.CategoryData(2, List.of(
+                new Modifier.Entry(Attributes.ATTACK_DAMAGE, 0.05, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.KNOCKBACK, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            )),
+            Modifier.Category.RANGED, new Modifier.CategoryData(2, List.of(
+                new Modifier.Entry(ModAttributes.PROJECTILE_DAMAGE, 0.05, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.KNOCKBACK, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            )),
             Modifier.Category.TOOL, new Modifier.CategoryData(2, List.of(
                 new Modifier.Entry(Attributes.ATTACK_DAMAGE, 0.05, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+                new Modifier.Entry(ModAttributes.KNOCKBACK, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             ))
         )
     ));
     public static final Modifier RUTHLESS = register(new Modifier(
         ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "ruthless"),
         Map.of(
+            Modifier.Category.MELEE, new Modifier.CategoryData(1, List.of(
+                new Modifier.Entry(Attributes.ATTACK_DAMAGE, 0.18, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.KNOCKBACK, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            )),
+            Modifier.Category.RANGED, new Modifier.CategoryData(1, List.of(
+                new Modifier.Entry(ModAttributes.PROJECTILE_DAMAGE, 0.18, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.KNOCKBACK, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            )),
             Modifier.Category.TOOL, new Modifier.CategoryData(1, List.of(
                 new Modifier.Entry(Attributes.ATTACK_DAMAGE, 0.18, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+                new Modifier.Entry(ModAttributes.KNOCKBACK, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             ))
         )
     ));
     public static final Modifier DEADLY = register(new Modifier(
         ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "deadly"),
         Map.of(
-            // TODO Ranged
             Modifier.Category.MELEE, new Modifier.CategoryData(2, List.of(
                 new Modifier.Entry(Attributes.ATTACK_DAMAGE, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
                 new Modifier.Entry(Attributes.ATTACK_SPEED, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            )),
+            Modifier.Category.RANGED, new Modifier.CategoryData(2, List.of(
+                new Modifier.Entry(ModAttributes.PROJECTILE_DAMAGE, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.LOAD_SPEED, 0.05, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.PROJECTILE_VELOCITY, 0.05, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.CRITICAL_CHANCE, 2.0, AttributeModifier.Operation.ADD_VALUE, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.KNOCKBACK, 0.05, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             )),
             Modifier.Category.TOOL, new Modifier.CategoryData(2, List.of(
                 new Modifier.Entry(Attributes.ATTACK_DAMAGE, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
@@ -357,6 +466,10 @@ public class Modifiers {
         Map.of(
             Modifier.Category.MELEE, new Modifier.CategoryData(1, List.of(
                 new Modifier.Entry(Attributes.ATTACK_SPEED, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.CRITICAL_CHANCE, 3.0, AttributeModifier.Operation.ADD_VALUE, EquipmentSlotGroup.MAINHAND)
+            )),
+            Modifier.Category.RANGED, new Modifier.CategoryData(1, List.of(
+                new Modifier.Entry(ModAttributes.LOAD_SPEED, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
                 new Modifier.Entry(ModAttributes.CRITICAL_CHANCE, 3.0, AttributeModifier.Operation.ADD_VALUE, EquipmentSlotGroup.MAINHAND)
             )),
             Modifier.Category.TOOL, new Modifier.CategoryData(1, List.of(
@@ -373,6 +486,11 @@ public class Modifiers {
                 new Modifier.Entry(Attributes.ATTACK_SPEED, 0.06, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
                 new Modifier.Entry(ModAttributes.CRITICAL_CHANCE, 3.0, AttributeModifier.Operation.ADD_VALUE, EquipmentSlotGroup.MAINHAND)
             )),
+            Modifier.Category.RANGED, new Modifier.CategoryData(2, List.of(
+                new Modifier.Entry(ModAttributes.PROJECTILE_DAMAGE, 0.07, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.LOAD_SPEED, 0.06, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.CRITICAL_CHANCE, 3.0, AttributeModifier.Operation.ADD_VALUE, EquipmentSlotGroup.MAINHAND)
+            )),
             Modifier.Category.TOOL, new Modifier.CategoryData(2, List.of(
                 new Modifier.Entry(Attributes.ATTACK_DAMAGE, 0.07, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
                 new Modifier.Entry(Attributes.BLOCK_BREAK_SPEED, 0.06, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
@@ -386,6 +504,9 @@ public class Modifiers {
             Modifier.Category.MELEE, new Modifier.CategoryData(1, List.of(
                 new Modifier.Entry(Attributes.ATTACK_SPEED, 0.05, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             )),
+            Modifier.Category.RANGED, new Modifier.CategoryData(1, List.of(
+                new Modifier.Entry(ModAttributes.LOAD_SPEED, 0.05, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            )),
             Modifier.Category.TOOL, new Modifier.CategoryData(1, List.of(
                 new Modifier.Entry(Attributes.BLOCK_BREAK_SPEED, 0.05, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             ))
@@ -398,13 +519,19 @@ public class Modifiers {
                 new Modifier.Entry(Attributes.ATTACK_DAMAGE, 0.05, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
                 new Modifier.Entry(Attributes.ATTACK_SPEED, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
                 new Modifier.Entry(ModAttributes.CRITICAL_CHANCE, 2.0, AttributeModifier.Operation.ADD_VALUE, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+                new Modifier.Entry(ModAttributes.KNOCKBACK, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            )),
+            Modifier.Category.RANGED, new Modifier.CategoryData(1, List.of(
+                new Modifier.Entry(ModAttributes.PROJECTILE_DAMAGE, 0.05, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.LOAD_SPEED, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.CRITICAL_CHANCE, 2.0, AttributeModifier.Operation.ADD_VALUE, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.KNOCKBACK, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             )),
             Modifier.Category.TOOL, new Modifier.CategoryData(1, List.of(
                 new Modifier.Entry(Attributes.ATTACK_DAMAGE, 0.05, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
                 new Modifier.Entry(Attributes.BLOCK_BREAK_SPEED, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
                 new Modifier.Entry(ModAttributes.CRITICAL_CHANCE, 2.0, AttributeModifier.Operation.ADD_VALUE, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+                new Modifier.Entry(ModAttributes.KNOCKBACK, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             ))
         )
     ));
@@ -434,14 +561,14 @@ public class Modifiers {
         ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "terrible"),
         Map.of(
             Modifier.Category.MELEE, new Modifier.CategoryData(-2, List.of(
+                new Modifier.Entry(Attributes.ATTACK_DAMAGE, -0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
                 new Modifier.Entry(Attributes.ENTITY_INTERACTION_RANGE, -0.13, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, -0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_DAMAGE, -0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+                new Modifier.Entry(ModAttributes.KNOCKBACK, -0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             )),
             Modifier.Category.TOOL, new Modifier.CategoryData(-2, List.of(
+                new Modifier.Entry(Attributes.ATTACK_DAMAGE, -0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
                 new Modifier.Entry(Attributes.BLOCK_INTERACTION_RANGE, -0.13, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, -0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_DAMAGE, -0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+                new Modifier.Entry(ModAttributes.KNOCKBACK, -0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             ))
         )
     ));
@@ -451,12 +578,12 @@ public class Modifiers {
             Modifier.Category.MELEE, new Modifier.CategoryData(-2, List.of(
                 new Modifier.Entry(Attributes.ATTACK_SPEED, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
                 new Modifier.Entry(Attributes.ENTITY_INTERACTION_RANGE, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+                new Modifier.Entry(ModAttributes.KNOCKBACK, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             )),
             Modifier.Category.TOOL, new Modifier.CategoryData(-2, List.of(
                 new Modifier.Entry(Attributes.BLOCK_BREAK_SPEED, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
                 new Modifier.Entry(Attributes.BLOCK_INTERACTION_RANGE, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+                new Modifier.Entry(ModAttributes.KNOCKBACK, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             ))
         )
     ));
@@ -464,14 +591,14 @@ public class Modifiers {
         ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "shameful"),
         Map.of(
             Modifier.Category.MELEE, new Modifier.CategoryData(-2, List.of(
+                new Modifier.Entry(Attributes.ATTACK_DAMAGE, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
                 new Modifier.Entry(Attributes.ENTITY_INTERACTION_RANGE, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, -0.2, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_DAMAGE, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+                new Modifier.Entry(ModAttributes.KNOCKBACK, -0.2, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             )),
             Modifier.Category.TOOL, new Modifier.CategoryData(-2, List.of(
+                new Modifier.Entry(Attributes.ATTACK_DAMAGE, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
                 new Modifier.Entry(Attributes.BLOCK_INTERACTION_RANGE, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, -0.2, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_DAMAGE, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+                new Modifier.Entry(ModAttributes.KNOCKBACK, -0.2, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             ))
         )
     ));
@@ -479,16 +606,16 @@ public class Modifiers {
         ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "bulky"),
         Map.of(
             Modifier.Category.MELEE, new Modifier.CategoryData(1, List.of(
-                new Modifier.Entry(Attributes.ENTITY_INTERACTION_RANGE, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
                 new Modifier.Entry(Attributes.ATTACK_DAMAGE, 0.05, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_SPEED, -0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+                new Modifier.Entry(Attributes.ATTACK_SPEED, -0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(Attributes.ENTITY_INTERACTION_RANGE, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.KNOCKBACK, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             )),
             Modifier.Category.TOOL, new Modifier.CategoryData(1, List.of(
-                new Modifier.Entry(Attributes.BLOCK_INTERACTION_RANGE, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
                 new Modifier.Entry(Attributes.ATTACK_DAMAGE, 0.05, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.BLOCK_BREAK_SPEED, -0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+                new Modifier.Entry(Attributes.BLOCK_BREAK_SPEED, -0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(Attributes.BLOCK_INTERACTION_RANGE, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.KNOCKBACK, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             ))
         )
     ));
@@ -514,18 +641,44 @@ public class Modifiers {
             ))
         )
     ));
+    public static final Modifier LIGHT = register(new Modifier(
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "light"),
+        Map.of(
+            Modifier.Category.MELEE, new Modifier.CategoryData(0, List.of(
+                new Modifier.Entry(Attributes.ATTACK_SPEED, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.KNOCKBACK, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            )),
+            Modifier.Category.TOOL, new Modifier.CategoryData(0, List.of(
+                new Modifier.Entry(Attributes.BLOCK_BREAK_SPEED, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.KNOCKBACK, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            ))
+        )
+    ));
+    public static final Modifier HEAVY = register(new Modifier(
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "heavy"),
+        Map.of(
+            Modifier.Category.MELEE, new Modifier.CategoryData(0, List.of(
+                new Modifier.Entry(Attributes.ATTACK_SPEED, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.KNOCKBACK, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            )),
+            Modifier.Category.TOOL, new Modifier.CategoryData(0, List.of(
+                new Modifier.Entry(Attributes.BLOCK_BREAK_SPEED, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.KNOCKBACK, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            ))
+        )
+    ));
     public static final Modifier SAVAGE = register(new Modifier(
         ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "savage"),
         Map.of(
             Modifier.Category.MELEE, new Modifier.CategoryData(2, List.of(
+                new Modifier.Entry(Attributes.ATTACK_DAMAGE, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
                 new Modifier.Entry(Attributes.ENTITY_INTERACTION_RANGE, 0.05, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_DAMAGE, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+                new Modifier.Entry(ModAttributes.KNOCKBACK, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             )),
             Modifier.Category.TOOL, new Modifier.CategoryData(2, List.of(
+                new Modifier.Entry(Attributes.ATTACK_DAMAGE, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
                 new Modifier.Entry(Attributes.BLOCK_INTERACTION_RANGE, 0.05, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_DAMAGE, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+                new Modifier.Entry(ModAttributes.KNOCKBACK, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             ))
         )
     ));
@@ -544,26 +697,6 @@ public class Modifiers {
         Map.of(
             Modifier.Category.MELEE, new Modifier.CategoryData(1, List.of(
                 new Modifier.Entry(Attributes.ATTACK_DAMAGE, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
-            ))
-        )
-    ));
-    public static final Modifier LIGHT = register(new Modifier(
-        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "light"),
-        Map.of(
-            Modifier.Category.MELEE, new Modifier.CategoryData(0, List.of(
-                new Modifier.Entry(Attributes.BLOCK_BREAK_SPEED, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_SPEED, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
-            ))
-        )
-    ));
-    public static final Modifier HEAVY = register(new Modifier(
-        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "heavy"),
-        Map.of(
-            Modifier.Category.MELEE, new Modifier.CategoryData(0, List.of(
-                new Modifier.Entry(Attributes.BLOCK_BREAK_SPEED, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_SPEED, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             ))
         )
     ));
@@ -593,7 +726,104 @@ public class Modifiers {
                 new Modifier.Entry(Attributes.ATTACK_SPEED, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
                 new Modifier.Entry(ModAttributes.CRITICAL_CHANCE, 5.0, AttributeModifier.Operation.ADD_VALUE, EquipmentSlotGroup.MAINHAND),
                 new Modifier.Entry(Attributes.ENTITY_INTERACTION_RANGE, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
-                new Modifier.Entry(Attributes.ATTACK_KNOCKBACK, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+                new Modifier.Entry(ModAttributes.KNOCKBACK, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            ))
+        )
+    ));
+
+    /* RANGED MODIFIERS */
+    public static final Modifier SIGHTED = register(new Modifier(
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "sighted"),
+        Map.of(
+            Modifier.Category.RANGED, new Modifier.CategoryData(1, List.of(
+                new Modifier.Entry(ModAttributes.PROJECTILE_DAMAGE, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.CRITICAL_CHANCE, 3.0, AttributeModifier.Operation.ADD_VALUE, EquipmentSlotGroup.MAINHAND)
+            ))
+        )
+    ));
+    public static final Modifier RAPID = register(new Modifier(
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "rapid"),
+        Map.of(
+            Modifier.Category.RANGED, new Modifier.CategoryData(2, List.of(
+                new Modifier.Entry(ModAttributes.LOAD_SPEED, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.PROJECTILE_VELOCITY, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            ))
+        )
+    ));
+    public static final Modifier INTIMIDATING = register(new Modifier(
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "intimidating"),
+        Map.of(
+            Modifier.Category.RANGED, new Modifier.CategoryData(2, List.of(
+                new Modifier.Entry(ModAttributes.PROJECTILE_VELOCITY, 0.05, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.KNOCKBACK, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            ))
+        )
+    ));
+    public static final Modifier STAUNCH = register(new Modifier(
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "staunch"),
+        Map.of(
+            Modifier.Category.RANGED, new Modifier.CategoryData(2, List.of(
+                new Modifier.Entry(ModAttributes.PROJECTILE_DAMAGE, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.KNOCKBACK, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            ))
+        )
+    ));
+    public static final Modifier AWFUL = register(new Modifier(
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "awful"),
+        Map.of(
+            Modifier.Category.RANGED, new Modifier.CategoryData(-2, List.of(
+                new Modifier.Entry(ModAttributes.PROJECTILE_DAMAGE, -0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.PROJECTILE_VELOCITY, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.KNOCKBACK, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            ))
+        )
+    ));
+    public static final Modifier LETHARGIC = register(new Modifier(
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "lethargic"),
+        Map.of(
+            Modifier.Category.RANGED, new Modifier.CategoryData(-2, List.of(
+                new Modifier.Entry(ModAttributes.LOAD_SPEED, -0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.PROJECTILE_VELOCITY, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            ))
+        )
+    ));
+    public static final Modifier AWKWARD = register(new Modifier(
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "awkward"),
+        Map.of(
+            Modifier.Category.RANGED, new Modifier.CategoryData(-2, List.of(
+                new Modifier.Entry(ModAttributes.LOAD_SPEED, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.KNOCKBACK, -0.2, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            ))
+        )
+    ));
+    public static final Modifier POWERFUL = register(new Modifier(
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "powerful"),
+        Map.of(
+            Modifier.Category.RANGED, new Modifier.CategoryData(1, List.of(
+                new Modifier.Entry(ModAttributes.PROJECTILE_DAMAGE, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.LOAD_SPEED, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.CRITICAL_CHANCE, 1.0, AttributeModifier.Operation.ADD_VALUE, EquipmentSlotGroup.MAINHAND)
+            ))
+        )
+    ));
+    public static final Modifier FRENZYING = register(new Modifier(
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "frenzying"),
+        Map.of(
+            Modifier.Category.RANGED, new Modifier.CategoryData(0, List.of(
+                new Modifier.Entry(ModAttributes.PROJECTILE_DAMAGE, -0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.LOAD_SPEED, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
+            ))
+        )
+    ));
+    public static final Modifier UNREAL = register(new Modifier(
+        ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "unreal"),
+        Map.of(
+            Modifier.Category.RANGED, new Modifier.CategoryData(2, List.of(
+                new Modifier.Entry(ModAttributes.PROJECTILE_DAMAGE, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.LOAD_SPEED, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.CRITICAL_CHANCE, 5.0, AttributeModifier.Operation.ADD_VALUE, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.PROJECTILE_VELOCITY, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND),
+                new Modifier.Entry(ModAttributes.KNOCKBACK, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, EquipmentSlotGroup.MAINHAND)
             ))
         )
     ));

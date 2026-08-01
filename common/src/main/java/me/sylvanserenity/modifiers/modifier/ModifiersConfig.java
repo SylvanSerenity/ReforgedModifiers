@@ -60,10 +60,10 @@ public class ModifiersConfig implements ConfigData {
     @Comment("Whether vanilla's jump-attack critical hit is disabled in favor of the critical strike chance attribute.")
     public boolean disableVanillaCritical = true;
 
-    @Comment("Damage multiplier applied on a critical hit (2.0 = double damage).")
+    @Comment("Damage multiplier applied on a critical hit. Default 2.0 (double damage).")
     public double criticalDamageMultiplier = 2.0;
 
-    @Comment("Extra knockback applied on a critical hit (0.4 = 40% more knockback).")
+    @Comment("Extra knockback applied on a critical hit. Default 0.4 (+40% knockback).")
     public double criticalKnockbackMultiplier = 0.4;
 
     @Comment("""
@@ -73,11 +73,11 @@ public class ModifiersConfig implements ConfigData {
     """)
     public Map<Tier, String[]> tiers = defaultTiers();
 
-    @Comment("Base critical strike chance for weapons not listed in criticalChance below, in percentage points (8.0 = 8%).")
+    @Comment("Base critical strike chance for weapons not listed in criticalChance below, in percentage points. Default 8.0 (8%).")
     public double defaultCriticalChance = 8.0;
 
     @Comment("""
-    Base critical strike chance by weapon, in percentage points (8.0 = 8%), overriding defaultCriticalChance above.
+    Base critical strike chance by weapon, in percentage points (8.0 = 8%), overriding defaultCriticalChance.
     Each key is an item id (e.g. "minecraft:trident") or a tag (e.g. "#minecraft:swords").
     """)
     public Map<String, Double> criticalChance = new LinkedHashMap<>(CRITICAL_CHANCE_DEFAULTS);
@@ -86,6 +86,7 @@ public class ModifiersConfig implements ConfigData {
         AutoConfig.register(ModifiersConfig.class, JanksonConfigSerializer::new);
     }
 
+    /* CONFIG GETTERS */
     public static boolean armorCountsAsAccessory() {
         return AutoConfig.getConfigHolder(ModifiersConfig.class).getConfig().armorCountsAsAccessory;
     }

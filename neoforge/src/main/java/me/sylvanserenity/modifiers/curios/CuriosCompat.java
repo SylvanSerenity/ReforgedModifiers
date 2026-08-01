@@ -1,6 +1,5 @@
 package me.sylvanserenity.modifiers.curios;
 
-import java.util.Set;
 import me.sylvanserenity.modifiers.modifier.Modifier;
 import me.sylvanserenity.modifiers.modifier.ModifierHandler;
 import net.minecraft.resources.ResourceLocation;
@@ -19,7 +18,7 @@ public class CuriosCompat {
         // Reactive, so its ids must match what apply()/remove() already stored on this stack.
         // Otherwise two stacks bearing the same modifier would collide under the same
         // AttributeModifier id and only one would ever contribute.
-        for (Modifier.Entry entry : mod.entries(Set.of(Modifier.Category.ACCESSORY))) {
+        for (Modifier.Entry entry : mod.entries(Modifier.Category.ACCESSORY)) {
             ResourceLocation modId = ModifierHandler.buildAttributeModifierId(stack, mod, entry.attr());
             event.addModifier(entry.attr(), new AttributeModifier(modId, entry.amount(), entry.op()));
         }

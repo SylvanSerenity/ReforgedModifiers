@@ -1,6 +1,5 @@
 package me.sylvanserenity.modifiers.modifier;
 
-import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +15,10 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
@@ -40,13 +42,13 @@ public class ModifierHandler {
     private static final String INSTANCE_ID_KEY = "ReforgedModifiersInstance";
 
     public static void apply(ItemStack stack, Modifier mod) {
-        Set<Modifier.Category> categories = getItemCategories(stack);
+        Modifier.Category category = getItemCategory(stack);
         boolean useNativeAccessoryApi = isAccessory(stack);
 
         // Add the modifier's own entry first, so it's listed above the item's existing attributes.
         ItemAttributeModifiers mods = ItemAttributeModifiers.EMPTY;
         Set<Holder<Attribute>> seenFromModifier = new HashSet<>();
-        for (Modifier.Entry e : mod.entries(categories)) {
+        for (Modifier.Entry e : mod.entries(category)) {
             ResourceLocation modId = buildAttributeModifierId(stack, mod, e.attr());
             if (useNativeAccessoryApi) {
                 Services.PLATFORM.applyAccessoryAttribute(stack, modId, e.attr(), e.amount(), e.op());
@@ -71,7 +73,7 @@ public class ModifierHandler {
         CustomData.update(DataComponents.CUSTOM_DATA, stack, tag -> tag.putString(MODIFIER_ID_KEY, mod.id().toString()));
 
         // Set item name.
-        Tier tier = getItemTier(stack, mod.tierDelta(categories));
+        Tier tier = getItemTier(stack, mod.tierDelta(category));
         Component modName = Component
             .translatable("modifier." + mod.id().getNamespace() + "." + mod.id().getPath())
             .withStyle(
@@ -89,8 +91,8 @@ public class ModifierHandler {
         if (mod == null) return;
 
         if (isAccessory(stack)) {
-            Set<Modifier.Category> categories = getItemCategories(stack);
-            for (Modifier.Entry e : mod.entries(categories)) {
+            Modifier.Category category = getItemCategory(stack);
+            for (Modifier.Entry e : mod.entries(category)) {
                 Services.PLATFORM.removeAccessoryAttribute(stack, buildAttributeModifierId(stack, mod, e.attr()), e.attr());
             }
         }
@@ -109,7 +111,7 @@ public class ModifierHandler {
 
     /// Whether mod is applicable to item.
     public static boolean isApplicable(ItemStack stack, Modifier mod) {
-        return !mod.entries(getItemCategories(stack)).isEmpty();
+        return !mod.entries(getItemCategory(stack)).isEmpty();
     }
 
     // Applies a random applicable modifier to the stack.
@@ -125,9 +127,23 @@ public class ModifierHandler {
         return mod;
     }
 
-    // Combines the held weapon's base critical chance with the player's critical chance attribute value.
-    public static float getCriticalChance(Player player) {
-        float points = getBaseCriticalChance(player.getWeaponItem()) + (float) player.getAttributeValue(ModAttributes.CRITICAL_CHANCE);
+    // Gives a freshly spawned mob's held weapons a random modifier.
+    public static void applyRandomToEquipment(LivingEntity entity) {
+        if (entity instanceof Player) return;
+
+        for (EquipmentSlot slot : new EquipmentSlot[] {EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND}) {
+            ItemStack stack = entity.getItemBySlot(slot);
+            if (!stack.isEmpty() && getAppliedModifier(stack) == null) {
+                applyRandom(stack, entity.getRandom());
+            }
+        }
+    }
+
+    // Combines the held weapon's base critical chance with the shooter's critical chance.
+    public static float getCriticalChance(LivingEntity entity) {
+        AttributeInstance attribute = entity.getAttribute(ModAttributes.CRITICAL_CHANCE);
+        float bonus = attribute != null ? (float) attribute.getValue() : 0.0F;
+        float points = getBaseCriticalChance(entity.getWeaponItem()) + bonus;
         // Convert to percentage chance.
         return points / 100.0F;
     }
@@ -148,30 +164,18 @@ public class ModifierHandler {
     }
 
     // Returns an empty set for items that aren't a valid target for any modifier.
-    private static Set<Modifier.Category> getItemCategories(ItemStack stack) {
+    private static Modifier.Category getItemCategory(ItemStack stack) {
         if (stack.getItem() instanceof ArmorItem) {
             return ModifiersConfig.armorCountsAsAccessory()
-                ? EnumSet.of(Modifier.Category.ACCESSORY)
-                : EnumSet.noneOf(Modifier.Category.class);
+                ? Modifier.Category.ACCESSORY
+                : null;
         }
-        if (isAccessory(stack)) return EnumSet.of(Modifier.Category.ACCESSORY);
+        if (isAccessory(stack)) return Modifier.Category.ACCESSORY;
 
-        // TOOL is a catch-all every weapon/tool item gets if not already categorized.
-        Set<Modifier.Category> categories = EnumSet.noneOf(Modifier.Category.class);
-        boolean isWeaponOrTool = false;
-        if (stack.getItem() instanceof ProjectileWeaponItem) {
-            categories.add(Modifier.Category.RANGED);
-            isWeaponOrTool = true;
-        }
-        if (isMeleeWeapon(stack)) {
-            categories.add(Modifier.Category.MELEE);
-            isWeaponOrTool = true;
-        }
-        if (stack.getItem() instanceof DiggerItem) {
-            isWeaponOrTool = true;
-        }
-        if (isWeaponOrTool) categories.add(Modifier.Category.TOOL);
-        return categories;
+        if (stack.getItem() instanceof ProjectileWeaponItem) return Modifier.Category.RANGED;
+        if (isMeleeWeapon(stack)) return Modifier.Category.MELEE;
+        if (stack.getItem() instanceof DiggerItem) return Modifier.Category.TOOL;
+        return null;
     }
 
     // Melee weapons include axes and anything non-DiggerItem with attack attributes.

@@ -175,13 +175,25 @@ public class ModifierHandler {
         if (stack.getItem() instanceof ProjectileWeaponItem) return Modifier.Category.RANGED;
         if (isMeleeWeapon(stack)) return Modifier.Category.MELEE;
         if (stack.getItem() instanceof DiggerItem) return Modifier.Category.TOOL;
-        return null;
+
+        // Fallback for modded items whose classes don't extend the vanilla tool/weapon hierarchy.
+        return getCategoryByName(stack);
     }
 
     // Melee weapons include axes and anything non-DiggerItem with attack attributes.
     private static boolean isMeleeWeapon(ItemStack stack) {
         if (stack.getItem() instanceof AxeItem) return true;
         return hasAttackAttributes(stack) && !(stack.getItem() instanceof DiggerItem);
+    }
+
+    private static final List<String> MELEE_NAME_KEYWORDS = List.of("sword");
+    private static final List<String> TOOL_NAME_KEYWORDS = List.of("axe", "shovel", "hoe", "shears"); // NOTE: "Pickaxe" contains "axe".
+    // Guesses a modded item's category from its registry name, e.g. "iron_pickaxe" -> TOOL.
+    private static Modifier.Category getCategoryByName(ItemStack stack) {
+        String path = BuiltInRegistries.ITEM.getKey(stack.getItem()).getPath();
+        if (MELEE_NAME_KEYWORDS.stream().anyMatch(path::contains)) return Modifier.Category.MELEE;
+        if (TOOL_NAME_KEYWORDS.stream().anyMatch(path::contains)) return Modifier.Category.TOOL;
+        return null;
     }
 
     private static boolean isAccessory(ItemStack stack) {

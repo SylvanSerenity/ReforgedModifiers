@@ -1,8 +1,11 @@
 {
+  "attribute.modifiers.critical_chance": "Critical Strike Chance",
   "modifier.modifiers.hard": "Hard",
   "modifier.modifiers.guarding": "Guarding",
   "modifier.modifiers.armored": "Armored",
   "modifier.modifiers.warding": "Warding",
+  "modifier.modifiers.precise": "Precise",
+  "modifier.modifiers.lucky": "Lucky",
   "modifier.modifiers.jagged": "Jagged",
   "modifier.modifiers.spiked": "Spiked",
   "modifier.modifiers.angry": "Angry",
@@ -15,6 +18,11 @@
   "modifier.modifiers.rash": "Rash",
   "modifier.modifiers.intrepid": "Intrepid",
   "modifier.modifiers.violent": "Violent",
+  "modifier.modifiers.keen": "Keen",
+  "modifier.modifiers.zealous": "Zealous",
+  "modifier.modifiers.superior": "Superior",
+  "modifier.modifiers.godly": "Godly",
+  "modifier.modifiers.demonic": "Demonic",
   "modifier.modifiers.lazy": "Lazy",
   "modifier.modifiers.slow": "Slow",
   "modifier.modifiers.sluggish": "Sluggish",
@@ -29,7 +37,10 @@
   "modifier.modifiers.unpleasant": "Unpleasant",
   "modifier.modifiers.ruthless": "Ruthless",
   "modifier.modifiers.deadly": "Deadly",
+  "modifier.modifiers.agile": "Agile",
+  "modifier.modifiers.murderous": "Murderous",
   "modifier.modifiers.nimble": "Nimble",
+  "modifier.modifiers.nasty": "Nasty",
   "modifier.modifiers.small": "Small",
   "modifier.modifiers.tiny": "Tiny",
   "modifier.modifiers.terrible": "Terrible",
@@ -43,5 +54,7 @@
   "modifier.modifiers.sharp": "Sharp",
   "modifier.modifiers.light": "Light",
   "modifier.modifiers.heavy": "Heavy",
-  "modifier.modifiers.dull": "Dull"
+  "modifier.modifiers.dull": "Dull",
+  "modifier.modifiers.dangerous": "Dangerous",
+  "modifier.modifiers.legendary": "Legendary"
 }

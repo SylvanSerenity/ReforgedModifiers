@@ -19,6 +19,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.DiggerItem;
@@ -124,6 +125,28 @@ public class ModifierHandler {
         return mod;
     }
 
+    // Combines the held weapon's base critical chance with the player's critical chance attribute value.
+    public static float getCriticalChance(Player player) {
+        float points = getBaseCriticalChance(player.getWeaponItem()) + (float) player.getAttributeValue(ModAttributes.CRITICAL_CHANCE);
+        // Convert to percentage chance.
+        return points / 100.0F;
+    }
+
+    private static float getBaseCriticalChance(ItemStack stack) {
+        for (Map.Entry<String, Double> entry : ModifiersConfig.criticalChance().entrySet()) {
+            if (matchesItem(stack, entry.getKey())) return entry.getValue().floatValue();
+        }
+        return (float) ModifiersConfig.defaultCriticalChance();
+    }
+
+    // Matches a config entry (item id or tag) against the stack.
+    private static boolean matchesItem(ItemStack stack, String id) {
+        if (id.startsWith("#")) {
+            return stack.is(TagKey.create(Registries.ITEM, ResourceLocation.parse(id.substring(1))));
+        }
+        return stack.is(BuiltInRegistries.ITEM.get(ResourceLocation.parse(id)));
+    }
+
     // Returns an empty set for items that aren't a valid target for any modifier.
     private static Set<Modifier.Category> getItemCategories(ItemStack stack) {
         if (stack.getItem() instanceof ArmorItem) {
@@ -173,12 +196,7 @@ public class ModifierHandler {
         return false;
     }
 
-    // Builds a stable, per-stack-unique AttributeModifier id for one of this modifier's entries. Two
-    // different stacks bearing the same modifier (e.g. two "Warding" rings) must not share an id -
-    // Curios/vanilla attribute stacking treats same-id modifiers as one shared instance, so without
-    // this only one ring would ever contribute, and removing either would remove it for both.
-    // Called both when creating entries (apply/remove) and reactively (NeoForge's CuriosCompat), so
-    // it must be public and produce the same id every time for the same stack.
+    // Builds a stable, per-stack-unique AttributeModifier id for one of this modifier's entries.
     public static ResourceLocation buildAttributeModifierId(ItemStack stack, Modifier mod, Holder<Attribute> attribute) {
         String instanceId = getOrCreateInstanceId(stack);
         return mod.id().withSuffix("/" + attribute.unwrapKey().orElseThrow().location().getPath() + "/" + instanceId);
@@ -193,9 +211,7 @@ public class ModifierHandler {
         return id;
     }
 
-    // Recovers which registered Modifier (if any) is currently applied to the stack. Read from
-    // CUSTOM_DATA rather than scanning attribute entries, since true accessory-slot items don't carry
-    // their bonus in the vanilla attribute component at all (see apply()).
+    // Recovers which registered Modifier (if any) is currently applied to the stack.
     public static Modifier getAppliedModifier(ItemStack stack) {
         CustomData data = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
         if (!data.contains(MODIFIER_ID_KEY)) return null;
@@ -203,9 +219,7 @@ public class ModifierHandler {
         return id != null ? Modifiers.MODIFIERS.get(id) : null;
     }
 
-    // Whether entry was added by a previous ModifierHandler.apply() call (identifiable by its
-    // AttributeModifier id belonging to a currently-registered Modifier), as opposed to the item's
-    // own base attributes, an enchantment, or some other mod's attribute modifier.
+    // Whether entry was added by a previous ModifierHandler.apply() call.
     private static boolean isOwnModifierEntry(ItemAttributeModifiers.Entry entry) {
         return recoverModifier(entry) != null;
     }

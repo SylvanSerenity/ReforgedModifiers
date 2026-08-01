@@ -17,6 +17,9 @@
     "entrypoints": {
         "main": [
             "me.sylvanserenity.modifiers.Modifiers"
+        ],
+        "client": [
+            "me.sylvanserenity.modifiers.ModifiersClient"
         ]
     },
     "mixins": [

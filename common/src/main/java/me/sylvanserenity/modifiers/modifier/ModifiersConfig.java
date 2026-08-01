@@ -1,6 +1,7 @@
 package me.sylvanserenity.modifiers.modifier;
 
 import java.util.EnumMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import me.shedaniel.autoconfig.AutoConfig;
@@ -46,9 +47,24 @@ public class ModifiersConfig implements ConfigData {
         })
     ));
 
+    // Percentage points (0-100), matching ModAttributes.CRITICAL_CHANCE's scale.
+    private static final Map<String, Double> CRITICAL_CHANCE_DEFAULTS = Map.ofEntries(
+        Map.entry("minecraft:trident", 6.0),
+        Map.entry("minecraft:mace", 10.0)
+    );
+
     /* LOADED CONFIG VARIABLES */
     @Comment("Whether armor pieces count as accessories and can receive accessory modifiers.")
     public boolean armorCountsAsAccessory = false;
+
+    @Comment("Whether vanilla's jump-attack critical hit is disabled in favor of the critical strike chance attribute.")
+    public boolean disableVanillaCritical = true;
+
+    @Comment("Damage multiplier applied on a critical hit (2.0 = double damage).")
+    public double criticalDamageMultiplier = 2.0;
+
+    @Comment("Extra knockback applied on a critical hit (0.4 = 40% more knockback).")
+    public double criticalKnockbackMultiplier = 0.4;
 
     @Comment("""
     Item tiers used to color modifier names.
@@ -57,12 +73,41 @@ public class ModifiersConfig implements ConfigData {
     """)
     public Map<Tier, String[]> tiers = defaultTiers();
 
+    @Comment("Base critical strike chance for weapons not listed in criticalChance below, in percentage points (8.0 = 8%).")
+    public double defaultCriticalChance = 8.0;
+
+    @Comment("""
+    Base critical strike chance by weapon, in percentage points (8.0 = 8%), overriding defaultCriticalChance above.
+    Each key is an item id (e.g. "minecraft:trident") or a tag (e.g. "#minecraft:swords").
+    """)
+    public Map<String, Double> criticalChance = new LinkedHashMap<>(CRITICAL_CHANCE_DEFAULTS);
+
     public static void register() {
         AutoConfig.register(ModifiersConfig.class, JanksonConfigSerializer::new);
     }
 
     public static boolean armorCountsAsAccessory() {
         return AutoConfig.getConfigHolder(ModifiersConfig.class).getConfig().armorCountsAsAccessory;
+    }
+
+    public static boolean disableVanillaCritical() {
+        return AutoConfig.getConfigHolder(ModifiersConfig.class).getConfig().disableVanillaCritical;
+    }
+
+    public static double criticalDamageMultiplier() {
+        return AutoConfig.getConfigHolder(ModifiersConfig.class).getConfig().criticalDamageMultiplier;
+    }
+
+    public static double criticalKnockbackMultiplier() {
+        return AutoConfig.getConfigHolder(ModifiersConfig.class).getConfig().criticalKnockbackMultiplier;
+    }
+
+    public static double defaultCriticalChance() {
+        return AutoConfig.getConfigHolder(ModifiersConfig.class).getConfig().defaultCriticalChance;
+    }
+
+    public static Map<String, Double> criticalChance() {
+        return AutoConfig.getConfigHolder(ModifiersConfig.class).getConfig().criticalChance;
     }
 
     // Merges per-tier: a tier missing from the saved config falls back to its own default,

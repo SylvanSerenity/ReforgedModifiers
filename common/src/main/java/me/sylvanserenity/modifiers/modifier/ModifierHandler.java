@@ -2,6 +2,7 @@ package me.sylvanserenity.modifiers.modifier;
 
 import java.util.EnumSet;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -14,6 +15,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -107,6 +109,19 @@ public class ModifierHandler {
     /// Whether mod is applicable to item.
     public static boolean isApplicable(ItemStack stack, Modifier mod) {
         return !mod.entries(getItemCategories(stack)).isEmpty();
+    }
+
+    // Applies a random applicable modifier to the stack.
+    // Returns the applied modifier, or null if none apply.
+    public static Modifier applyRandom(ItemStack stack, RandomSource random) {
+        List<Modifier> pool = Modifiers.MODIFIERS.values().stream()
+            .filter(mod -> isApplicable(stack, mod))
+            .toList();
+        if (pool.isEmpty()) return null;
+
+        Modifier mod = pool.get(random.nextInt(pool.size()));
+        apply(stack, mod);
+        return mod;
     }
 
     // Returns an empty set for items that aren't a valid target for any modifier.

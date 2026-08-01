@@ -4,7 +4,9 @@
   "package": "me.sylvanserenity.modifiers.mixin",
   "refmap": "${mod_id}.refmap.json",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [],
+  "mixins": [
+    "ItemMixin"
+  ],
   "client": [],
   "server": [],
   "injectors": {

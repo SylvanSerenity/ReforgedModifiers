@@ -1,7 +1,5 @@
 package me.sylvanserenity.modifiers.command;
 
-import java.util.List;
-
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 
@@ -44,12 +42,8 @@ public class ModifierCommand {
                 .executes(ctx -> {
                     ServerPlayer player = ctx.getSource().getPlayerOrException();
                     ItemStack stack = player.getMainHandItem();
-                    List<Modifier> pool = Modifiers.MODIFIERS.values().stream()
-                        .filter(mod -> ModifierHandler.isApplicable(stack, mod))
-                        .toList();
-                    if (pool.isEmpty()) throw new SimpleCommandExceptionType(Component.literal("No modifiers apply to this item")).create();
-                    Modifier mod = pool.get(player.getRandom().nextInt(pool.size()));
-                    ModifierHandler.apply(stack, mod);
+                    Modifier mod = ModifierHandler.applyRandom(stack, player.getRandom());
+                    if (mod == null) throw new SimpleCommandExceptionType(Component.literal("No modifiers apply to this item")).create();
                     ctx.getSource().sendSuccess(() -> Component.literal("Applied ").append(modifierName(mod)).append(Component.literal(" modifier")), true);
                     return 1;
                 })

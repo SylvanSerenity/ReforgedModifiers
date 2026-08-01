@@ -34,7 +34,7 @@ public class ModifierCommand {
                             throw new SimpleCommandExceptionType(Component.literal("This modifier cannot be applied to this item")).create();
                         }
                         ModifierHandler.apply(stack, mod);
-                        ctx.getSource().sendSuccess(() -> Component.literal("Applied ").append(modifierName(mod)).append(Component.literal(" to the item")), true);
+                        ctx.getSource().sendSuccess(() -> Component.literal("Applied ").append(modifierName(mod)).append(Component.literal(" modifier")), true);
                         return 1;
                     })
                 )
@@ -50,7 +50,7 @@ public class ModifierCommand {
                     if (pool.isEmpty()) throw new SimpleCommandExceptionType(Component.literal("No modifiers apply to this item")).create();
                     Modifier mod = pool.get(player.getRandom().nextInt(pool.size()));
                     ModifierHandler.apply(stack, mod);
-                    ctx.getSource().sendSuccess(() -> Component.literal("Applied modifier ").append(modifierName(mod)).append(Component.literal(" to the item")), true);
+                    ctx.getSource().sendSuccess(() -> Component.literal("Applied ").append(modifierName(mod)).append(Component.literal(" modifier")), true);
                     return 1;
                 })
             )
@@ -62,7 +62,7 @@ public class ModifierCommand {
                     Modifier mod = ModifierHandler.getAppliedModifier(stack);
                     if (mod == null) throw new SimpleCommandExceptionType(Component.literal("This item has no modifier to remove")).create();
                     ModifierHandler.remove(stack);
-                    ctx.getSource().sendSuccess(() -> Component.literal("Removed ").append(modifierName(mod)).append(Component.literal(" from the item")), true);
+                    ctx.getSource().sendSuccess(() -> Component.literal("Removed ").append(modifierName(mod)).append(Component.literal(" modifier")), true);
                     return 1;
                 })
             )

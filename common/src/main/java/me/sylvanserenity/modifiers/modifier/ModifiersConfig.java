@@ -68,6 +68,9 @@ public class ModifiersConfig implements ConfigData {
     @Comment("Extra knockback applied on a critical hit. Default 0.4 (+40% knockback).")
     public double criticalKnockbackMultiplier = 0.4;
 
+    @Comment("Whether an axe counts as a weapon, allowing melee modifiers but disabling mining speed bonuses.")
+    public boolean axeIsWeapon = false;
+
     @Comment("""
     Knockback strength of a +100% KNOCKBACK attribute.
     Added on top of Punch's knockback.
@@ -110,6 +113,10 @@ public class ModifiersConfig implements ConfigData {
 
     public static double criticalKnockbackMultiplier() {
         return AutoConfig.getConfigHolder(ModifiersConfig.class).getConfig().criticalKnockbackMultiplier;
+    }
+
+    public static boolean axeIsWeapon() {
+        return AutoConfig.getConfigHolder(ModifiersConfig.class).getConfig().axeIsWeapon;
     }
 
     public static double baseRangedKnockback() {

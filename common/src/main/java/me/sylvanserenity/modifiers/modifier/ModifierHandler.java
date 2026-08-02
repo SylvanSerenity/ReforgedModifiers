@@ -180,9 +180,9 @@ public class ModifierHandler {
         return getCategoryByName(stack);
     }
 
-    // Melee weapons include axes and anything non-DiggerItem with attack attributes.
+    // Melee weapons anything non-DiggerItem with attack attributes.
     private static boolean isMeleeWeapon(ItemStack stack) {
-        if (stack.getItem() instanceof AxeItem) return true;
+        if (ModifiersConfig.axeIsWeapon() && stack.getItem() instanceof AxeItem) return true;
         return hasAttackAttributes(stack) && !(stack.getItem() instanceof DiggerItem);
     }
 
